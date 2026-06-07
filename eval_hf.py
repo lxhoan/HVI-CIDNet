@@ -38,7 +38,7 @@ if __name__ == '__main__':
     eval_parser.add_argument('--gamma', type=float, default=1.0)
     el = eval_parser.parse_args()
 
-    model = CIDNet().cuda()
+    model = CIDNet().cpu()
     model = from_pretrained(cls=model,pretrained_model_name_or_path=el.path)
     model.eval()
 
@@ -56,10 +56,10 @@ if __name__ == '__main__':
         model.trans.alpha = el.alpha_i
         model.trans.gated = True
         model.trans.gated2 = True
-        output = model(input.cuda()**el.gamma)
+        output = model(input.cpu()**el.gamma)
             
 
-    output = torch.clamp(output.cuda(),0,1).cuda()
+    output = torch.clamp(output.cpu(),0,1).cpu()
     output = output[:, :, :h, :w]
     enhanced_img = transforms.ToPILImage()(output.squeeze(0))
     output_folder = './output_hf'

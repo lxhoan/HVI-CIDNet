@@ -73,7 +73,7 @@ def remove_weights_prefix(paths):
     os_name = platform.system()
     if os_name.lower() == 'windows':
         cleaned_paths = [path.replace('weights\\', '') for path in paths]
-    elif os_name.lower() == 'linux':
+    elif (os_name.lower() == 'linux' or os_name.lower() == 'darwin'):
         cleaned_paths = [path.replace('weights/', '') for path in paths]
         
     return cleaned_paths
@@ -98,7 +98,7 @@ interface = gr.Interface(
         gr.Textbox(label="BRISQUE",info="Lower is better.")
     ],
     title="HVI-CIDNet (Low-Light Image Enhancement)",
-    allow_flagging="never"
+    flagging_mode="never"
 )
 
 interface.launch(server_port=7862)
