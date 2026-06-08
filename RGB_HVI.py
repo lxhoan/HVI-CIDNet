@@ -16,4 +16,4 @@ print(hvi.min(), hvi.max())
 rgb_back = transform.PHVIT(hvi)  # PHVIT uses this_k from the last HVIT call
 
 rgb_back = torch.clamp(rgb_back, 0, 1)
-transforms.ToPILImage()(rgb_back.squeeze(0)).save("test_rgb_back.png")
+transforms.ToPILImage()(rgb_back.squeeze(0)).save("RGB_HVI_rgb_back.png")
